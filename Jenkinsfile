@@ -13,11 +13,18 @@ pipeline {
                 sh 'npm install'
             }
         }
-        // stage('Test') {
-        //     steps {
-        //         sh 'npm run test'
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                sh 'npm run test'
+            }
+        }
+        stage('Sonarqube analysis') {
+            steps {
+                withSonarQubeEnv('SONAR_LATEST') {
+                    sh 'npm run build sonar:sonar'
+                }                
+            }
+        }
         stage('Archiving test results') {
             steps {
                 archiveArtifacts artifacts: '**/coverage/*.xml', followSymlinks: false 
