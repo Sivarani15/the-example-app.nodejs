@@ -14,7 +14,9 @@ pipeline {
             }
         }
         stage('Archiving test results') {
-            archiveArtifacts artifacts: '**/coverage/*.xml', followSymlinks: false
+            stepts {
+                archiveArtifacts artifacts: '**/coverage/*.xml', followSymlinks: false 
+            } 
         }
         
     }
