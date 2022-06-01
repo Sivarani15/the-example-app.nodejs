@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'npm install npm run test'
+                sh 'npm install, npm run test'
             }
         }
         stage('Archiving test results') {
