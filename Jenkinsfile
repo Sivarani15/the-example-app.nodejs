@@ -13,11 +13,11 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'npm run test'
-            }
-        }
+        // stage('Test') {
+        //     steps {
+        //         sh 'npm run test'
+        //     }
+        // }
         stage('Archiving test results') {
             steps {
                 archiveArtifacts artifacts: '**/coverage/*.xml', followSymlinks: false 
