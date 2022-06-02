@@ -18,18 +18,27 @@ pipeline {
                 sh 'npm run test'
             }
         }
-        stage('Build and Sonarqube analysis') {
+        stage('Build') {
             steps {
-                withSonarQubeEnv('SONAR_LATEST') {
-                    sh 'npm run build'
-                }                
+                sh 'npm run build'
             }
         }
-        stage('Archiving test results') {
+        stage('Archiving the Project') {
             steps {
-                archiveArtifacts artifacts: '**/coverage/*.xml', followSymlinks: false 
-            } 
+                sh 'npm run pack'
+            }
         }
+
+        stage('Sonarqube analysis') {
+            steps {
+                sh 'npm run sonar'                
+            }
+        }
+        // stage('Archiving test results') {
+        //     steps {
+        //         archiveArtifacts artifacts: '**/coverage/*.xml', followSymlinks: false 
+        //     } 
+        // }
         
     }
 }
