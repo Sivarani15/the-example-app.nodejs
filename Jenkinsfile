@@ -8,7 +8,7 @@ pipeline {
             git branch: 'declarative', url: 'https://github.com/Sivarani15/js-e2e-express-server.git'
             }
         }
-        stage('Build') {
+        stage('Install dependencies') {
             steps {
                 sh 'npm install'
             }
@@ -18,10 +18,10 @@ pipeline {
                 sh 'npm run test'
             }
         }
-        stage('Sonarqube analysis') {
+        stage('Build and Sonarqube analysis') {
             steps {
                 withSonarQubeEnv('SONAR_LATEST') {
-                    sh 'npm run build sonar:sonar'
+                    sh 'npm run build'
                 }                
             }
         }
