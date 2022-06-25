@@ -23,15 +23,17 @@ pipeline {
                 sh 'npm run build'
             }
         }
-        stage('Archiving the Project') {
-            steps {
-                sh 'npm run pack'
-            }
-        }
-
+        
         stage('Sonarqube analysis') {
             steps {
                 sh 'npm run sonar'                
+            }
+        }
+        stage('Archiving the Project') {
+            steps {
+                sh 'npm pack'
+                archiveArtifacts artifacts: '**/*.tgz', followSymlinks: false 
+
             }
         }
         // stage('Archiving test results') {
